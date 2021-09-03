@@ -34,6 +34,21 @@ namespace DbProject
             return utente;
         }
 
+        public int RecuperaIdUtente(string user)
+        {
+            using (SqlConnection conn = ConnectedMode.Connessione())
+            {
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = conn;
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = "SELECT Id FROM Utente WHERE @Username=Username";
+                    command.Parameters.AddWithValue("@Username", user);
+                    int id = (int)command.ExecuteScalar();
+                    return id;
+                    conn.Close();
+            }
+        }
+
         public Utente NuovoUtente(Utente utente)
         {
 
@@ -87,7 +102,23 @@ namespace DbProject
 
         }
 
+        public void UpdateUtente(Utente utente, int idUtente)
+        {
+            using (SqlConnection connection = ConnectedMode.Connessione())
+            {
+                    SqlCommand command = new SqlCommand();
+                    command.Connection = connection;
+                    command.CommandType = System.Data.CommandType.Text;
+                    command.CommandText = "UPDATE Utente SET IsAdmin=@IsAdmin WHERE Id=@Id";
+                    command.Parameters.AddWithValue("@IsAdmin", utente.IsAdmin);
+                    command.Parameters.AddWithValue("@Id", idUtente);
 
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    connection.Close();
+
+            }
+        }
 
 
     }

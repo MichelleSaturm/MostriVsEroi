@@ -11,6 +11,7 @@ namespace Fantasia_Finale
 {
     class Accedi
     {
+        //LOGIN
         public static void Login()
         {
             Utente utente = RichiestaDati.InserisciUsernamePassword();
@@ -18,11 +19,16 @@ namespace Fantasia_Finale
             if (utente.IsAuthenticated)
             {
                 if (RuoloIsAdmin(utente))
+                {
                     //UTENTE E' UN ADMIN
-                    Menu.MenuAdmin(utente);
+                    int idUtente = UtenteServices.RecuperaIdUtente(utente);
+                    Menu.MenuAdmin(utente, idUtente);
+                }
                 else
-                    //UTENTE NON E' UN ADMIN
-                    Menu.MenuNonAdmin(utente);
+                {   //UTENTE NON E' UN ADMIN
+                    int idUtente = UtenteServices.RecuperaIdUtente(utente);
+                    Menu.MenuNonAdmin(utente, idUtente);
+                }
             }
             else
             {
@@ -33,7 +39,7 @@ namespace Fantasia_Finale
             }
         }
 
-
+        //CONTROLLO SE E' ADMIN
         public static bool RuoloIsAdmin(Utente utente)
         {
             if (utente.IsAdmin)
@@ -42,6 +48,7 @@ namespace Fantasia_Finale
                 return false;
         }
 
+        //REGISTRAZIONE
         public static void Registrati()
         {
             Utente utente = RichiestaDati.NuovoUsernamePassword();

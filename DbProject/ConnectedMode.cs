@@ -6,7 +6,7 @@ namespace DbProject
 {
     public static class ConnectedMode
     {
-        const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=MostriVsEroi;Trusted_Connection=True;";
+        const string connectionString = "Server=(localdb)\\mssqllocaldb;Database=FantasiaFinale;Trusted_Connection=True;";
         public static SqlConnection Connessione()
         {
             try
@@ -18,8 +18,8 @@ namespace DbProject
             }
             catch (SqlException ex)
             {
-                Console.WriteLine($"Exception: {ex.Message}");
-                throw new Exception("C'è stato un problema con la connessione al database", ex);
+                Console.WriteLine($"Eccezione: {ex.Message}");
+                throw new Exception("ATTENZIONE! C'è stato un piccolo intoppo nella connessione al database", ex);
             }
 
 

@@ -8,5 +8,7 @@ namespace BusinessLayer
         public Utente Autenticazione(Utente utente);
         public List<Utente> TrovaUser();
         public Utente NuovoUtente(Utente utente);
+        public void UpdateUtente(Utente utente, int idUtente);
+        public int RecuperaIdUtente(string user);
     }
 }

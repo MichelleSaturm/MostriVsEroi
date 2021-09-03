@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 
 namespace Fantasia_Finale
 {
+
+    //DA CONTROLLARE UN LOOP DI MENU CAUSATO DALLA PROMOZIONE DA NON-ADMIN AD ADMIN
     class Menu
     {
         //MENU LOG-IN/REGISTRAZIONE
@@ -58,21 +60,25 @@ namespace Fantasia_Finale
         }
 
         //MENU PER GLI UTENTI ADMIN
-        public static void MenuAdmin(Utente utente)
+        public static void MenuAdmin(Utente utente, int idUtente)
         {
 
             bool continuare = true;
             do
             {
                 Console.Clear();
-                Console.WriteLine("==== BENTORNATO ====");
-                Console.WriteLine($"Utente: {utente.Username}");
+                Console.WriteLine($"==== BENTORNATO {utente.Username.ToUpper()} ====");
                 Console.WriteLine();
                 Console.WriteLine("[1] Gioca");
                 Console.WriteLine("[2] Crea Nuovo Eroe");
                 Console.WriteLine("[3] Elimina Eroe");
-                Console.WriteLine("[4] Crea Nuovo Mostro");
-                Console.WriteLine("[5] Mostra Classifica Globale");
+                Console.WriteLine("[4] Lista Eroi");
+                Console.WriteLine();
+                Console.WriteLine("== FUNZIONI ADMIN ==");
+                Console.WriteLine("[5] Crea Nuovo Mostro");
+                Console.WriteLine("[6] Elimina Mostro");
+                Console.WriteLine("[7] Lista Mostri");
+                Console.WriteLine("[8] Mostra Classifica Globale");
                 Console.WriteLine();
                 Console.WriteLine("[0] Log-out");
                 Console.WriteLine();
@@ -89,39 +95,38 @@ namespace Fantasia_Finale
                 switch (choice)
                 {
                     case 1:
-                        Console.Clear();
-                        Console.WriteLine("HAI SCELTO GIOCARE");
-                        Console.ReadLine();
+                        StartGame.Play(utente, idUtente);
                         Console.Clear();
                         break;
                     case 2:
-                        Console.Clear();
-                        Console.WriteLine("HAI SCELTO DI CREARE UN NUOVO EROE");
-                        Console.ReadLine();
+                        GestioneEroi.Creazione(utente, idUtente);
                         Console.Clear();
                         break;
                     case 3:
-                        Console.Clear();
-                        Console.WriteLine("HAI SCELTO DI ELIMINARE UN EROE");
-                        Console.ReadLine();
+                        GestioneEroi.EliminaEroe(utente, idUtente);
                         Console.Clear();
                         break;
                     case 4:
-                        Console.Clear();
-                        Console.WriteLine("HAI CREARE UN NUOVO MOSTRO");
-                        Console.ReadLine();
+                        GestioneEroi.ListaEroi(utente, idUtente);
                         Console.Clear();
                         break;
                     case 5:
+                        GestioneMostri.CreaMostro(utente, idUtente);
                         Console.Clear();
-                        Console.WriteLine("HAI SCELTO DI VISUALIZZARE LA CLASSIFICA GLOBALE");
-                        Console.ReadLine();
+                        break;
+                    case 6:
+                        GestioneMostri.EliminaMostro();
+                        Console.Clear();
+                        break;
+                    case 7:
+                        GestioneMostri.ListaMostri();
+                        Console.Clear();
+                        break;
+                    case 8:
+                        GestioneClassifica.ClassificaGlobale();
                         Console.Clear();
                         break;
                     case 0:
-                        Console.Clear();
-                        Console.WriteLine("Hai effettuato il Log-out!\n" +
-                            "Grazie per aver giocato con noi!");
                         continuare = false;
                         break;
                     default:
@@ -132,19 +137,19 @@ namespace Fantasia_Finale
         }
 
         //MENU PER GLI UTENTI 
-        public static void MenuNonAdmin(Utente utente)
+        public static void MenuNonAdmin(Utente utente, int idUtente)
         {
 
             bool continuare = true;
             do
             {
                 Console.Clear();
-                Console.WriteLine("==== BENTORNATO ====");
-                Console.WriteLine($"Utente: {utente.Username}");
+                Console.WriteLine($"==== BENTORNATO {utente.Username.ToUpper()} ====");
                 Console.WriteLine();
                 Console.WriteLine("[1] Gioca");
                 Console.WriteLine("[2] Crea Nuovo Eroe");
                 Console.WriteLine("[3] Elimina Eroe");
+                Console.WriteLine("[4] Lista Eroi");
                 Console.WriteLine();
                 Console.WriteLine("[0] Log-out");
                 Console.WriteLine();
@@ -161,27 +166,22 @@ namespace Fantasia_Finale
                 switch (choice)
                 {
                     case 1:
-                        Console.Clear();
-                        Console.WriteLine("HAI SCELTO GIOCARE");
-                        Console.ReadLine();
+                        StartGame.Play(utente, idUtente);
                         Console.Clear();
                         break;
                     case 2:
-                        Console.Clear();
-                        Console.WriteLine("HAI SCELTO DI CREARE UN NUOVO EROE");
-                        Console.ReadLine();
+                        GestioneEroi.Creazione(utente, idUtente);
                         Console.Clear();
                         break;
                     case 3:
+                        GestioneEroi.EliminaEroe(utente,idUtente);
                         Console.Clear();
-                        Console.WriteLine("HAI SCELTO DI ELIMINARE UN EROE");
-                        Console.ReadLine();
+                        break;
+                    case 4:
+                        GestioneEroi.ListaEroi(utente, idUtente);
                         Console.Clear();
                         break;
                     case 0:
-                        Console.Clear();
-                        Console.WriteLine("Hai effettuato il log-out!\n" +
-                            "Grazie per aver giocato con noi!");
                         continuare = false;
                         break;
                     default:
